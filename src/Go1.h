@@ -7,9 +7,9 @@
 namespace mc_robots
 {
 
-struct MC_ROBOTS_DLLAPI NewRobotModule : public mc_rbdyn::RobotModule
+struct MC_ROBOTS_DLLAPI Go1 : public mc_rbdyn::RobotModule
 {
-  NewRobotModule();
+  Go1();
 };
 
 } // namespace mc_robots

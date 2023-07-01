@@ -1,4 +1,4 @@
-#include "NewRobotModule.h"
+#include "Go1.h"
 
 #include <RBDyn/parsers/urdf.h>
 
@@ -16,7 +16,7 @@ static const std::string JVRC_DESCRIPTION_PATH = "@JVRC_DESCRIPTION_PATH@";
 namespace mc_robots
 {
 
-NewRobotModule::NewRobotModule() : mc_rbdyn::RobotModule(JVRC_DESCRIPTION_PATH, "jvrc1")
+Go1::Go1() : mc_rbdyn::RobotModule(JVRC_DESCRIPTION_PATH, "jvrc1")
 {
   // True if the robot has a fixed base, false otherwise
   bool fixed = false;
@@ -91,4 +91,4 @@ NewRobotModule::NewRobotModule() : mc_rbdyn::RobotModule(JVRC_DESCRIPTION_PATH, 
 
 #include <mc_rbdyn/RobotModuleMacros.h>
 
-ROBOT_MODULE_DEFAULT_CONSTRUCTOR("NewRobotModule", mc_robots::NewRobotModule)
+ROBOT_MODULE_DEFAULT_CONSTRUCTOR("Go1", mc_robots::Go1)

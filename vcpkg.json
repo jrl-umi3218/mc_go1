@@ -2,7 +2,7 @@
   "name": "mc-rtc-new-robot-module",
   "version-string": "1.0.0",
   "homepage": "",
-  "description": "NewRobotModule for mc_rtc",
+  "description": "Go1 for mc_rtc",
   "dependencies": [
     "mc-rtc"
   ]

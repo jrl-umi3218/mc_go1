@@ -1,4 +1,4 @@
-name: CI of NewRobotModule
+name: CI of Go1
 
 on:
   push:

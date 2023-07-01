@@ -9,18 +9,18 @@ It comes with:
 - automated GitHub Actions builds on three major platforms
 
 This repository actually creates two robot modules:
-- `NewRobotModule` is a C++ robot module in the [src](src) folder
-- `NewRobotModuleYAML` is a YAML robot module in the [yaml](yaml) folder
+- `Go1` is a C++ robot module in the [src](src) folder
+- `Go1YAML` is a YAML robot module in the [yaml](yaml) folder
 
 They both re-create the JVRC1 robot module shipped with [mc_rtc]
 
 Quick start
 --
 
-1. Renaming the robot module from `NewRobotModule` to `MyRobotModule`. In a shell (Git Bash on Windows, replace sed with gsed on macOS):
+1. Renaming the robot module from `Go1` to `Go1`. In a shell (Git Bash on Windows, replace sed with gsed on macOS):
 
 ```bash
-sed -i -e's/NewRobotModule/MyRobotModule/g' `find . -type f`
+sed -i -e's/Go1/Go1/g' `find . -type f`
 ```
 
 2. If you choose to build a C++ robot module
@@ -28,8 +28,8 @@ sed -i -e's/NewRobotModule/MyRobotModule/g' `find . -type f`
 ```bash
 git rm -rf yaml
 sed -i -e's/add_subdirectory(yaml)//' CMakeLists.txt
-git mv src/NewRobotModule.in.cpp src/MyRobotModule.in.cpp
-git mv src/NewRobotModule.h src/MyRobotModule.h
+git mv src/Go1.in.cpp src/Go1.in.cpp
+git mv src/Go1.h src/Go1.h
 ```
 
 3. If you choose to build a YAML robot module
@@ -43,6 +43,6 @@ sed -i -e's/add_subdirectory(src)//' CMakeLists.txt
 
 5. Build and install the project
 
-6. Run using your [mc_rtc] interface of choice, and setting `MainRobot` to `MyRobotModule`
+6. Run using your [mc_rtc] interface of choice, and setting `MainRobot` to `Go1`
 
 [mc_rtc]: https://jrl-umi3218.github.io/mc_rtc/

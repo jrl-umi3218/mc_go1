@@ -74,19 +74,12 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
   _bodySensors.emplace_back("Accelerometer", "trunk", sva::PTransformd(Eigen::Vector3d(0., 0., 0.)));
   _bodySensors.emplace_back("FloatingBase", "trunk", sva::PTransformd::Identity());
   // // Define a minimal set of self-collisions
-  _minimalSelfCollisions = {{"FR_calf", "RR_thigh", 0.02, 0.01, 0.0},
-                            {"FR_calf", "RR_calf", 0.02, 0.01, 0.0},
-                            {"FL_calf", "RL_thigh", 0.02, 0.01, 0.0},
-                            {"FL_calf", "RL_calf", 0.02, 0.01, 0.0},
-                            {"FR_calf", "FL_calf", 0.02, 0.01, 0.0},
-                            {"RR_calf", "RL_calf", 0.02, 0.01, 0.0},
-                            {"FR_thigh", "FL_thigh", 0.02, 0.01, 0.0},
-                            {"FR_thigh", "FL_calf", 0.02, 0.01, 0.0},
-                            {"FR_calf", "FL_thigh", 0.02, 0.01, 0.0},
-                            {"RR_thigh", "RL_thigh", 0.02, 0.01, 0.0},
-                            {"RR_thigh", "RL_calf", 0.02, 0.01, 0.0},
-                            {"RR_calf", "RL_thigh", 0.02, 0.01, 0.0}
-  };
+  _minimalSelfCollisions = {{"FR_calf", "RR_thigh", 0.02, 0.01, 0.0},  {"FR_calf", "RR_calf", 0.02, 0.01, 0.0},
+                            {"FL_calf", "RL_thigh", 0.02, 0.01, 0.0},  {"FL_calf", "RL_calf", 0.02, 0.01, 0.0},
+                            {"FR_calf", "FL_calf", 0.02, 0.01, 0.0},   {"RR_calf", "RL_calf", 0.02, 0.01, 0.0},
+                            {"FR_thigh", "FL_thigh", 0.02, 0.01, 0.0}, {"FR_thigh", "FL_calf", 0.02, 0.01, 0.0},
+                            {"FR_calf", "FL_thigh", 0.02, 0.01, 0.0},  {"RR_thigh", "RL_thigh", 0.02, 0.01, 0.0},
+                            {"RR_thigh", "RL_calf", 0.02, 0.01, 0.0},  {"RR_calf", "RL_thigh", 0.02, 0.01, 0.0}};
 
   _commonSelfCollisions = _minimalSelfCollisions;
 }

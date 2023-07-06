@@ -17,21 +17,34 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
   init(rbd::parsers::from_urdf_file(urdf_path, fixed));
   rsdf_dir = path + "/rsdf/" + name + "/";
   // Automatically load the convex hulls associated to each body
-  std::string convexPath = path + "/convex/" + name + "/";
-  bfs::path p(convexPath);
-  if(bfs::exists(p) && bfs::is_directory(p))
+  bfs::path convexPath = bfs::path(path) / "convex/go1";
+  for(const auto & b : mb.bodies())
   {
-    std::vector<bfs::path> files;
-    std::copy(bfs::directory_iterator(p), bfs::directory_iterator(), std::back_inserter(files));
-    for(const bfs::path & file : files)
+    bfs::path ch = convexPath / (b.name() + "-ch.txt");
+    if(bfs::exists(ch)) { _convexHull[b.name()] = {b.name(), ch.string()}; }
+  }
+  _collisionTransforms["trunk"] = sva::PTransformd{mc_rbdyn::rpyToMat(Eigen::Vector3d{0, 0, -1.57})};
+
+  // Generate duplicated and mirrored convexes
+  //
+  // FL: front left
+  // FR: front right
+  // RR: rear right
+  // RL: rear left
+  // Pair of side and whether the convex should be mirrored on that side
+  std::vector<std::pair<std::string, bool>> sides = {{"FL", false}, {"FR", true}, {"RL", false}, {"RR", true}};
+  // pair of body name / whether it should be mirrored
+  std::vector<std::pair<std::string, bool>> bodies = {{"calf", false}, {"thigh", true}, {"hip", false}};
+  for(const auto & [body, mirrorBody] : bodies)
+  {
+    for(const auto & [side, mirrorSide] : sides)
     {
-      size_t off = file.filename().string().rfind("-ch.txt");
-      if(off != std::string::npos)
-      {
-        std::string name = file.filename().string();
-        name.replace(off, 7, "");
-        _convexHull[name] = std::pair<std::string, std::string>(name, file.string());
-      }
+      auto bodyName = side + "_" + body;
+      bfs::path ch;
+      if(mirrorBody && mirrorSide) { ch = convexPath / (body + "_mirror-ch.txt"); }
+      else { ch = convexPath / (body + "-ch.txt"); }
+      mc_rtc::log::info("body: {}, convex: {}", bodyName, ch.string());
+      if(bfs::exists(ch)) { _convexHull[bodyName] = {bodyName, ch.string()}; }
     }
   }
   mc_rtc::log::success("PandaRobotModule uses urdf_path {}", urdf_path);

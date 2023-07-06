@@ -1,22 +1,15 @@
 #include "Go1.h"
+#include "config.h"
 
 #include <RBDyn/parsers/urdf.h>
 
 #include <boost/filesystem.hpp>
 namespace bfs = boost::filesystem;
 
-namespace
-{
-
-// This is set by CMake, see CMakeLists.txt
-static const std::string GO1_DESCRIPTION_PATH = "@GO1_DESCRIPTION_PATH@";
-
-} // namespace
-
 namespace mc_robots
 {
 
-Go1::Go1() : mc_rbdyn::RobotModule(GO1_DESCRIPTION_PATH, "go1")
+Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
 {
   // True if the robot has a fixed base, false otherwise
   bool fixed = false;

@@ -60,6 +60,11 @@ jobs:
             registries:
             - repo: mc-rtc/vcpkg-registry
               packages: [ spacevecalg, rbdyn, eigen-qld, sch-core, tasks, mc-rbdyn-urdf, mc-rtc-data, eigen-quadprog, state-observation, hpp-spline, mc-rtc ]
+        ros: |
+          apt: mc-rtc-plugin
+          workspace:
+            - path: jrl-umi3218/mc_go1_description
+          install: ${{ matrix.catkin-install }}
     - name: Build and test
       uses: jrl-umi3218/github-actions/build-cmake-project@master
       with:

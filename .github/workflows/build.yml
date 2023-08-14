@@ -16,12 +16,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-18.04, ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-20.04]
         build-type: [RelWithDebInfo]
         compiler: [gcc]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: recursive
     - name: Install dependencies
@@ -49,6 +49,7 @@ jobs:
         ros: |
           apt: mc-rtc-plugin
           workspace:
+            - path: unitreerobotics/unitree_ros
             - path: jrl-umi3218/mc_go1_description
           install: ${{ matrix.catkin-install }}
     - name: Build and test

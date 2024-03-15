@@ -23,10 +23,9 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
     bfs::path ch = convexPath / (b.name() + "-ch.txt");
     if(bfs::exists(ch)) { _convexHull[b.name()] = {b.name(), ch.string()}; }
   }
-  _collisionTransforms["trunk"] = sva::PTransformd{mc_rbdyn::rpyToMat(Eigen::Vector3d{0, 0, -1.57})};
+  _collisionTransforms["trunk"] = sva::PTransformd(sva::RotZ(-mc_rtc::constants::PI / 2));
 
   // Generate duplicated and mirrored convexes
-  //
   // FL: front left
   // FR: front right
   // RR: rear right
@@ -43,7 +42,6 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
       bfs::path ch;
       if(mirrorBody && mirrorSide) { ch = convexPath / (body + "_mirror-ch.txt"); }
       else { ch = convexPath / (body + "-ch.txt"); }
-      mc_rtc::log::info("body: {}, convex: {}", bodyName, ch.string());
       if(bfs::exists(ch)) { _convexHull[bodyName] = {bodyName, ch.string()}; }
     }
   }
@@ -55,8 +53,8 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
                       "FL_thigh_joint", "FL_calf_joint",  "RR_hip_joint",   "RR_thigh_joint",
                       "RR_calf_joint",  "RL_hip_joint",   "RL_thigh_joint", "RL_calf_joint"};
   // Stance: joint name, angle in degrees
-  // // Default joint configuration, if a joint is omitted the configuration is 0 or the middle point of the limit range
-  // if
+  // // Default joint configuration, if a joint is omitted the configuration is 0 or the middle point of the limit
+  // range if
   // // 0 is not a valid configuration
   std::map<std::string, double> standing{
       {"FR_hip_joint", 0.0},    {"FR_thigh_joint", 0.67}, {"FR_calf_joint", -1.3},  {"FL_hip_joint", 0.0},

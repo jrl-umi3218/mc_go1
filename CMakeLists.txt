@@ -23,7 +23,7 @@ if(MSVC AND _VCPKG_INSTALLED_DIR)
 endif()
 
 find_package(mc_rtc REQUIRED)
-find_package(mc_go1_description REQUIRED)
+find_description_package(mc_go1_description)
 
 add_subdirectory(src)
 

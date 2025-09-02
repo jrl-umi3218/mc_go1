@@ -41,7 +41,10 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
       auto bodyName = side + "_" + body;
       bfs::path ch;
       if(mirrorBody && mirrorSide) { ch = convexPath / (body + "_mirror-ch.txt"); }
-      else { ch = convexPath / (body + "-ch.txt"); }
+      else
+      {
+        ch = convexPath / (body + "-ch.txt");
+      }
       if(bfs::exists(ch)) { _convexHull[bodyName] = {bodyName, ch.string()}; }
     }
   }

@@ -48,9 +48,10 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
       if(bfs::exists(ch)) { _convexHull[bodyName] = {bodyName, ch.string()}; }
     }
   }
-  mc_rtc::log::success("PandaRobotModule uses urdf_path {}", urdf_path);
-  mc_rtc::log::success("PandaRobotModule uses convexPath {}", convexPath);
-  mc_rtc::log::success("PandaRobotModule uses rsdf_dir {}", rsdf_dir);
+  mc_rtc::log::success("Go1RobotModule uses urdf_path {}", urdf_path);
+  mc_rtc::log::success("Go1RobotModule uses convexPath {}", convexPath);
+  mc_rtc::log::success("Go1RobotModule uses rsdf_dir {}", rsdf_dir);
+
   // Ref joint order
   _ref_joint_order = {"FR_hip_joint",   "FR_thigh_joint", "FR_calf_joint",  "FL_hip_joint",
                       "FL_thigh_joint", "FL_calf_joint",  "RR_hip_joint",   "RR_thigh_joint",
@@ -72,7 +73,7 @@ Go1::Go1() : mc_rbdyn::RobotModule(mc_rtc::GO1_DESCRIPTION_PATH, "go1")
   // // Default configuration of the floating base
   _default_attitude = {1., 0., 0., 0., 0., 0., 0.35};
 
-  _bodySensors.emplace_back("Accelerometer", "trunk", sva::PTransformd(Eigen::Vector3d(0., 0., 0.)));
+  _bodySensors.emplace_back("Accelerometer", "trunk", sva::PTransformd(Eigen::Vector3d(-0.01592, -0.06659, -0.00617)));
   _bodySensors.emplace_back("FloatingBase", "trunk", sva::PTransformd::Identity());
   // // Define a minimal set of self-collisions
   _minimalSelfCollisions = {{"FR_calf", "RR_thigh", 0.02, 0.01, 0.0},  {"FR_calf", "RR_calf", 0.02, 0.01, 0.0},

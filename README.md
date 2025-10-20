@@ -1,4 +1,4 @@
-mc_rtc new robot module template
+mc_rtc GO1 robot module
 ==
 
 This project is a template for a new robot module project wihtin [mc_rtc]

@@ -8,8 +8,6 @@ namespace mc_robots
 {
 
 struct MC_ROBOTS_DLLAPI Go1 : public mc_rbdyn::RobotModule
-{
-  Go1();
-};
+{ Go1(); };
 
 } // namespace mc_robots
